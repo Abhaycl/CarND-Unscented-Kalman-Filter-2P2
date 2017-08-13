@@ -286,6 +286,9 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
         Tc = Tc + weights(i) * x_diff * z_diff.transpose();
     }
     
+    //create example vector for incoming radar measurement
+    VectorXd z = meas_package.raw_measurements_;
+    
     //Kalman gain K;
     MatrixXd K = Tc * S.inverse();
     
@@ -297,6 +300,11 @@ void UKF::UpdateRadar(MeasurementPackage meas_package) {
     while (z_diff(1) < -M_PI) z_diff(1) += 2. * M_PI;
     
     //update state mean and covariance matrix
-    x = x + K * z_diff;
-    P = P - K * S * K.transpose();
+    x_ = x_ + K * z_diff;
+    P_ = P_ - K * S * K.transpose();
+    
+    //Calculate NIS
+    if (meas_package.sensor_type_ == MeasurementPackage::RADAR){ // Radar
+        NIS_radar_ = z.transpose() * S.inverse() * z;
+    }
 }
