@@ -2,6 +2,8 @@
 
 In this project utilize an Unscented Kalman Filter to estimate the state of a moving object of interest with noisy lidar and radar measurements. Passing the project requires obtaining RMSE values that are lower that the tolerance outlined in the project reburic. 
 
+On the path: https://github.com/Abhaycl/CarND-Catch-Run-Away-Car-UKF-Bonus-Challenge is the bonus challenge
+
 <!--more-->
 
 [//]: # (Image References)
